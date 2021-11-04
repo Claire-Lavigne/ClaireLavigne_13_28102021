@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import datas from "../datas";
 import Nav from "../Components/Nav";
 import Account from "../Components/Account";
@@ -6,19 +7,26 @@ import Footer from "../Components/Footer";
 import styled from "styled-components";
 
 function UserProfile() {
+  const userName = "Tony";
+  const userLastname = "Jarvis";
+  const authenticated = true;
+
+  if (!authenticated) {
+    return <Redirect to="/login" />;
+  }
   return (
     <>
       <Nav />
-      <main class="main bg-dark">
+      <main className="main bg-dark">
         <SCHeader>
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {userName} {userLastname}!
           </h1>
           <SCBtnEdit>Edit Name</SCBtnEdit>
         </SCHeader>
-        <h2 class="sr-only">Accounts</h2>
+        <h2 className="sr-only">Accounts</h2>
         {datas.account.map((item, index) => (
           <Account
             key={index}

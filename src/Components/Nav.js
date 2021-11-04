@@ -4,28 +4,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
-const Nav = () => (
-  <SCNav>
-    <SCNavLogo to="/">
-      <img
-        src={process.env.PUBLIC_URL + "/argentBankLogo.png"}
-        alt="Argent Bank Logo"
-      />
-      <h1 className="sr-only">Argent Bank</h1>
-    </SCNavLogo>
-    <div>
-      <SCNavLink to="/login">
-        <FontAwesomeIcon icon={faUserCircle} />
-        Sign In or Tony
-      </SCNavLink>
-      {/* Sign Out Link if connected */}
-      <SCNavLink to="/">
-        <FontAwesomeIcon icon={faSignOutAlt} />
-        Sign Out
-      </SCNavLink>
-    </div>
-  </SCNav>
-);
+const Nav = () => {
+  const userName = "Tony";
+  const authenticated = true;
+
+  return (
+    <SCNav>
+      <SCNavLogo to="/">
+        <img
+          src={process.env.PUBLIC_URL + "/argentBankLogo.png"}
+          alt="Argent Bank Logo"
+        />
+        <h1 className="sr-only">Argent Bank</h1>
+      </SCNavLogo>
+      <div>
+        {authenticated ? (
+          <>
+            <SCNavLink to="/profile">
+              <FontAwesomeIcon icon={faUserCircle} />
+              {userName}
+            </SCNavLink>
+            <SCNavLink to="/">
+              <FontAwesomeIcon icon={faSignOutAlt} />
+              Sign Out
+            </SCNavLink>
+          </>
+        ) : (
+          <SCNavLink to="/login">
+            <FontAwesomeIcon icon={faUserCircle} />
+            Sign In
+          </SCNavLink>
+        )}
+      </div>
+    </SCNav>
+  );
+};
 
 export default Nav;
 

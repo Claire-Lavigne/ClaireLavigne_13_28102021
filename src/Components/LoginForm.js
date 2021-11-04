@@ -1,25 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
-function LoginForm() {
+const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      email,
+      password,
+      remember,
+    };
+
+    axios
+      .post("http://localhost:3001/api/v1/user/login", data)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.data.body.token);
+        setAuthenticated(true);
+        setRedirect(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  if (redirect) {
+    return <Redirect to="/profile" authenticated={authenticated} />;
+  }
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <SCInputWrapper>
-        <label for="username">Username</label>
-        <input type="text" id="username" />
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </SCInputWrapper>
       <SCInputWrapper>
-        <label for="password">Password</label>
-        <input type="password" id="password" />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </SCInputWrapper>
       <SCInputRemember>
-        <input type="checkbox" id="remember-me" />
-        <label for="remember-me">Remember me</label>
+        <input
+          type="checkbox"
+          id="remember-me"
+          onChange={(e) => setRemember(e.target.checked)}
+        />
+        <label htmlFor="remember-me">Remember me</label>
       </SCInputRemember>
       <SCBtnSignIn>Sign In</SCBtnSignIn>
     </form>
   );
-}
+};
 
 export default LoginForm;
 
