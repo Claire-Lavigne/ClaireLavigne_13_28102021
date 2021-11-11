@@ -1,17 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import styled from "styled-components";
 import axios from "axios";
+import { LOG_IN } from "../reducers/isLogged";
+import styled from "styled-components";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-  const [redirect, setRedirect] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
+  const isLoggedIn = useSelector((state) => state.user.isLogged);
+
+  const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     const data = {
       email,
       password,
@@ -21,18 +25,19 @@ const LoginForm = () => {
     axios
       .post("http://localhost:3001/api/v1/user/login", data)
       .then((res) => {
-        console.log(res);
         localStorage.setItem("token", res.data.body.token);
-        setAuthenticated(true);
-        setRedirect(true);
+        dispatch({
+          type: LOG_IN,
+          payload: { user: data },
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  if (redirect) {
-    return <Redirect to="/profile" authenticated={authenticated} />;
+  
+  if (isLoggedIn) {
+    return <Redirect to="/profile" />;
   }
 
   return (

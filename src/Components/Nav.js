@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LOG_OUT } from "../reducers/isLogged";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +8,14 @@ import styled from "styled-components";
 
 const Nav = () => {
   const userName = "Tony";
-  const authenticated = true;
+  const isLoggedIn = useSelector((state) => state.user.isLogged);
+  const dispatch = useDispatch();
+
+  const onClick = (e) => {
+    e.preventDefault();
+
+    dispatch({ type: LOG_OUT });
+  };
 
   return (
     <SCNav>
@@ -18,14 +27,15 @@ const Nav = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </SCNavLogo>
       <div>
-        {authenticated ? (
+        {isLoggedIn ? (
           <>
             <SCNavLink to="/profile">
               <FontAwesomeIcon icon={faUserCircle} />
               {userName}
             </SCNavLink>
-            <SCNavLink to="/">
+            <SCNavLink to="/" onClick={onClick}>
               <FontAwesomeIcon icon={faSignOutAlt} />
+              {/* if sign out, set authenticated to false and remove token */}
               Sign Out
             </SCNavLink>
           </>

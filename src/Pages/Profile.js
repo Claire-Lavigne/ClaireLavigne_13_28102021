@@ -5,13 +5,14 @@ import Nav from "../Components/Nav";
 import Account from "../Components/Account";
 import Footer from "../Components/Footer";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 function UserProfile() {
   const userName = "Tony";
   const userLastname = "Jarvis";
-  const authenticated = true;
+  const isLogged = useSelector((state) => state.user.isLogged);
 
-  if (!authenticated) {
+  if (!isLogged) {
     return <Redirect to="/login" />;
   }
   return (
