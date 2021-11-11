@@ -7,7 +7,8 @@ import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const Nav = () => {
-  const userName = "Tony";
+  const userFirstName = useSelector((state) => state.user.userFirstName);
+  const userLastName = useSelector((state) => state.user.userLastName);
   const isLoggedIn = useSelector((state) => state.user.isLogged);
   const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const Nav = () => {
           <>
             <SCNavLink to="/profile">
               <FontAwesomeIcon icon={faUserCircle} />
-              {userName}
+              {userFirstName} {userLastName}
             </SCNavLink>
             <SCNavLink to="/" onClick={onClick}>
               <FontAwesomeIcon icon={faSignOutAlt} />

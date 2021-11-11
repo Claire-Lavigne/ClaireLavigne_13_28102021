@@ -8,8 +8,7 @@ assignees: ""
 
 A user should be able to:
 
-:heavy_check_mark: Navigate to the home page (`/`)
-
-- [ ] See all placeholder data from mockup
+:heavy_check_mark: Navigate to the home page (`/`)  
+:heavy_check_mark: See all placeholder data from mockup
 
 For more information on accessing the design assets, see the [Design Assets section in the README](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API#design-assets).

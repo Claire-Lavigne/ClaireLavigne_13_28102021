@@ -9,7 +9,8 @@ assignees: ""
 A user should be able to:
 
 :heavy_check_mark: See the logout button when logged in  
-:heavy_check_mark: Click the logout button  
-:heavy_check_mark: Be returned to the home page (`/`)
+:heavy_check_mark: Click the logout button
+
+- Be returned to the home page (`/`)
 
 For more information on accessing the design assets, see the [Design Assets section in the README](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API#design-assets).

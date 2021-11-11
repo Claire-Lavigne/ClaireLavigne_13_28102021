@@ -26,16 +26,28 @@ const LoginForm = () => {
       .post("http://localhost:3001/api/v1/user/login", data)
       .then((res) => {
         localStorage.setItem("token", res.data.body.token);
-        dispatch({
-          type: LOG_IN,
-          payload: { user: data },
-        });
+        const config = {
+          headers: { Authorization: `Bearer ${res.data.body.token}` },
+        };
+        axios
+          .post("http://localhost:3001/api/v1/user/profile", {}, config)
+          .then((res) => {
+            console.log(res.data.body);
+            dispatch({
+              type: LOG_IN,
+              payload: {
+                userFirstName: res.data.body.firstName,
+                userLastName: res.data.body.lastName,
+              },
+            });
+          });
       })
+
       .catch((err) => {
         console.log(err);
       });
   };
-  
+
   if (isLoggedIn) {
     return <Redirect to="/profile" />;
   }
