@@ -4,8 +4,8 @@ export const LOG_OUT = "LOG_OUT";
 
 const initialState = {
   isLogged: false,
-  userFirstName: "",
-  userLastName: "",
+  firstName: "",
+  lastName: "",
 };
 
 // Set a state default value
@@ -17,8 +17,8 @@ const loggedReducer = (state = initialState, action) => {
       console.log(action);
       return {
         isLogged: true,
-        userFirstName: action.payload.userFirstName,
-        userLastName: action.payload.userLastName,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
       };
     case LOG_OUT:
       return {

@@ -1,21 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
 import { LOG_OUT } from "../reducers/isLogged";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const Nav = () => {
-  const userFirstName = useSelector((state) => state.user.userFirstName);
-  const userLastName = useSelector((state) => state.user.userLastName);
+  const userFirstName = useSelector((state) => state.user.firstName);
   const isLoggedIn = useSelector((state) => state.user.isLogged);
+  const sessionToken = sessionStorage.getItem("token");
+  const localToken = localStorage.getItem("token");
   const dispatch = useDispatch();
 
-  const onClick = (e) => {
-    e.preventDefault();
-
+  const onClick = () => {
     dispatch({ type: LOG_OUT });
+
+    sessionStorage.getItem("token") && sessionStorage.removeItem("token");
   };
 
   return (
@@ -28,15 +29,14 @@ const Nav = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </SCNavLogo>
       <div>
-        {isLoggedIn ? (
+        {isLoggedIn && (sessionToken || localToken) ? (
           <>
             <SCNavLink to="/profile">
               <FontAwesomeIcon icon={faUserCircle} />
-              {userFirstName} {userLastName}
+              {userFirstName}
             </SCNavLink>
             <SCNavLink to="/" onClick={onClick}>
               <FontAwesomeIcon icon={faSignOutAlt} />
-              {/* if sign out, set authenticated to false and remove token */}
               Sign Out
             </SCNavLink>
           </>

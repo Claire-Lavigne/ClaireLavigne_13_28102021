@@ -25,7 +25,10 @@ const LoginForm = () => {
     axios
       .post("http://localhost:3001/api/v1/user/login", data)
       .then((res) => {
-        localStorage.setItem("token", res.data.body.token);
+        data.remember
+          ? localStorage.setItem("token", res.data.body.token)
+          : localStorage.setItem("token", res.data.body.token);
+
         const config = {
           headers: { Authorization: `Bearer ${res.data.body.token}` },
         };
@@ -36,8 +39,8 @@ const LoginForm = () => {
             dispatch({
               type: LOG_IN,
               payload: {
-                userFirstName: res.data.body.firstName,
-                userLastName: res.data.body.lastName,
+                firstName: res.data.body.firstName,
+                lastName: res.data.body.lastName,
               },
             });
           });
