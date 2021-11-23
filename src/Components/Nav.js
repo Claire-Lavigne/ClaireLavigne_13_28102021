@@ -40,18 +40,15 @@ const Nav = () => {
         {token ? (
           <>
             <SCNavLink to="/profile">
-              <FontAwesomeIcon icon={faUserCircle} />
-              {userFirstName}
+              <FontAwesomeIcon icon={faUserCircle} /> {userFirstName}
             </SCNavLink>
             <SCNavLink to="/" onClick={onClick}>
-              <FontAwesomeIcon icon={faSignOutAlt} />
-              Sign Out
+              <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
             </SCNavLink>
           </>
         ) : (
           <SCNavLink to="/login">
-            <FontAwesomeIcon icon={faUserCircle} />
-            Sign In
+            <FontAwesomeIcon icon={faUserCircle} /> Sign In
           </SCNavLink>
         )}
       </div>
