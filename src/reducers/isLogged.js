@@ -14,15 +14,19 @@ const loggedReducer = (state = initialState, action) => {
   switch (action.type) {
     // Do something based on the different types of actions
     case LOG_IN:
-      console.log(action);
+      console.log("action", action);
       return {
+        ...state,
         isLogged: true,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
       };
     case LOG_OUT:
       return {
+        ...state,
         isLogged: false,
+        firstName: "",
+        lastName: "",
       };
     default:
       return state;

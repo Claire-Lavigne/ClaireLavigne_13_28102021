@@ -16,9 +16,16 @@ function UserProfile() {
   const [save, setSave] = useState(false);
   const userFirstName = useSelector((state) => state.user.firstName);
   const userLastName = useSelector((state) => state.user.lastName);
-  const isLogged = useSelector((state) => state.user.isLogged);
   const sessionToken = sessionStorage.getItem("token");
   const localToken = localStorage.getItem("token");
+
+  let token;
+  if (localToken) {
+    token = localToken;
+  }
+  if (sessionToken) {
+    token = sessionToken;
+  }
 
   const dispatch = useDispatch();
 
@@ -28,15 +35,6 @@ function UserProfile() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let token;
-
-    if (localToken) {
-      token = localToken;
-    } else if (sessionToken) {
-      token = sessionToken;
-    } else {
-      token = "";
-    }
 
     if (save) {
       const data = {
@@ -50,7 +48,7 @@ function UserProfile() {
       axios
         .put("http://localhost:3001/api/v1/user/profile", data, config)
         .then((res) => {
-          console.log(res.data.body);
+          console.log("profile response", res.data.body);
           dispatch({
             type: LOG_IN,
             payload: {
@@ -66,60 +64,80 @@ function UserProfile() {
     setDisplayName(true);
   };
   // keep page if actualise
-  if (!isLogged && (!sessionToken || !localToken)) {
+
+  if (!token) {
     return <Redirect to="/login" />;
+  } else {
+    let config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    axios
+      .post("http://localhost:3001/api/v1/user/profile", {}, config)
+      .then((res) => {
+        console.log("login form response", res.data.body);
+        dispatch({
+          type: LOG_IN,
+          payload: {
+            firstName: res.data.body.firstName,
+            lastName: res.data.body.lastName,
+          },
+        });
+      });
+    return (
+      <>
+        <Nav />
+        <main className="main bg-dark">
+          {displayName ? (
+            <SCHeader>
+              <h1>
+                Welcome back
+                <br />
+                {userFirstName} {userLastName}!
+              </h1>
+              <SCBtnEdit onClick={onEditName}>Edit Name</SCBtnEdit>
+            </SCHeader>
+          ) : (
+            <SCHeader>
+              <h1>Welcome back</h1>
+              <form onSubmit={onSubmit} autoComplete="false">
+                <div>
+                  <SCInputText
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder={userFirstName}
+                    onChange={(e) => setFirstName(e.target.value.trim())}
+                  />
+                  <SCInputText
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder={userLastName}
+                    onChange={(e) => setLastName(e.target.value.trim())}
+                  />
+                </div>
+                <SCBtnEdition onClick={() => setSave(true)}>Save</SCBtnEdition>
+                <SCBtnEdition onClick={() => setSave(false)}>
+                  Cancel
+                </SCBtnEdition>
+              </form>
+            </SCHeader>
+          )}
+          <h2 className="sr-only">Accounts</h2>
+          {datas.account.map((item, index) => (
+            <Account
+              key={index}
+              title={item.title}
+              amount={item.amount}
+              desc={item.desc}
+            />
+          ))}
+        </main>
+        <Footer />
+      </>
+    );
   }
-  return (
-    <>
-      <Nav />
-      <main className="main bg-dark">
-        {displayName ? (
-          <SCHeader>
-            <h1>
-              Welcome back
-              <br />
-              {userFirstName} {userLastName}!
-            </h1>
-            <SCBtnEdit onClick={onEditName}>Edit Name</SCBtnEdit>
-          </SCHeader>
-        ) : (
-          <SCHeader>
-            <h1>Welcome back</h1>
-            <form onSubmit={onSubmit} autoComplete={false}>
-              <div>
-                <SCInputText
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  placeholder={userFirstName}
-                  onChange={(e) => setFirstName(e.target.value.trim())}
-                />
-                <SCInputText
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  placeholder={userLastName}
-                  onChange={(e) => setLastName(e.target.value.trim())}
-                />
-              </div>
-              <SCBtnEdition onClick={() => setSave(true)}>Save</SCBtnEdition>
-              <SCBtnEdition onClick={() => setSave(false)}>Cancel</SCBtnEdition>
-            </form>
-          </SCHeader>
-        )}
-        <h2 className="sr-only">Accounts</h2>
-        {datas.account.map((item, index) => (
-          <Account
-            key={index}
-            title={item.title}
-            amount={item.amount}
-            desc={item.desc}
-          />
-        ))}
-      </main>
-      <Footer />
-    </>
-  );
 }
 
 export default UserProfile;
