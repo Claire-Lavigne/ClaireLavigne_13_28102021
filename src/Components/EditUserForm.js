@@ -7,6 +7,7 @@ import styled from "styled-components";
 function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
   const [firstName, setFirstName] = useState(userFirstName);
   const [lastName, setLastName] = useState(userLastName);
+  const [displayError, setDisplayError] = useState(false);
   const [save, setSave] = useState(false);
 
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
         lastName,
       };
       if (firstName.length < 2 || lastName.length < 2) {
-        alert("il faut remplir les champs");
+        setDisplayError(true);
         return false;
       }
       let config = {
@@ -48,6 +49,11 @@ function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
 
   return (
     <form onSubmit={onEditUser} autoComplete="false">
+      {displayError && (
+        <div className="error">
+          Please fill in the modified fields or Cancel
+        </div>
+      )}
       <div>
         <SCInputText
           type="text"
