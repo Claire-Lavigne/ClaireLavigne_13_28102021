@@ -7,12 +7,14 @@ import { createStore } from "redux";
 import allReducers from "./reducers";
 import { Provider } from "react-redux";
 
+// Create a Redux Store​
 const store = createStore(
   allReducers,
   // redux devtools Chrome extension
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+// Provide the Redux Store to React​
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -1,6 +1,4 @@
-// indicate the type of action being performed.
-export const LOG_IN = "LOG_IN";
-export const LOG_OUT = "LOG_OUT";
+import * as actionType from "../actions/ActionType";
 
 const initialState = {
   isLogged: false,
@@ -13,15 +11,16 @@ const loggedReducer = (state = initialState, action) => {
   // The reducer looks at the action type field to decide what happens
   switch (action.type) {
     // Do something based on the different types of actions
-    case LOG_IN:
+    case actionType.LOG_IN:
       console.log("action", action);
       return {
+        // copy data and update the copy
         ...state,
         isLogged: true,
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
       };
-    case LOG_OUT:
+    case actionType.LOG_OUT:
       return {
         ...state,
         isLogged: false,

@@ -8,7 +8,7 @@ import Nav from "../Components/Nav";
 import EditUserForm from "../Components/EditUserForm";
 import Account from "../Components/Account";
 import Footer from "../Components/Footer";
-import { LOG_IN } from "../reducers/isLogged";
+import { LOG_IN } from "../actions/ActionType";
 import styled from "styled-components";
 
 function UserProfile() {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import { LOG_IN } from "../reducers/isLogged";
+import { LOG_IN } from "../actions/ActionType";
 import styled from "styled-components";
 
 const LoginForm = () => {

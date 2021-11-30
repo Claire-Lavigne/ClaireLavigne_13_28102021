@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { LOG_IN } from "../reducers/isLogged";
+import { LOG_IN } from "../actions/ActionType";
 import styled from "styled-components";
 
 function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {

@@ -8,7 +8,6 @@ assignees: ""
 
 The React app contains an implementation of Redux for state management that:
 
-:heavy_check_mark: a store to manage all of the data
-
-- [ ] action(s) for sending information
-- [ ] reducer(s) for handling application state changes
+:heavy_check_mark: a store to manage all of the data  
+:heavy_check_mark: action(s) for sending information  
+:heavy_check_mark: reducer(s) for handling application state changes
