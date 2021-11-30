@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import datas from "../datas";
+import Token from "../functions/checkToken";
 import Nav from "../Components/Nav";
 import EditUserForm from "../Components/EditUserForm";
 import Account from "../Components/Account";
@@ -14,16 +15,6 @@ function UserProfile() {
   const [displayName, setDisplayName] = useState(true);
   const userFirstName = useSelector((state) => state.user.firstName);
   const userLastName = useSelector((state) => state.user.lastName);
-  const sessionToken = sessionStorage.getItem("token");
-  const localToken = localStorage.getItem("token");
-
-  let token;
-  if (localToken) {
-    token = localToken;
-  }
-  if (sessionToken) {
-    token = sessionToken;
-  }
 
   const dispatch = useDispatch();
 
@@ -32,11 +23,11 @@ function UserProfile() {
   };
 
   // keep page if actualise
-  if (!token) {
+  if (!Token()) {
     return <Redirect to="/login" />;
   } else {
     let config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${Token()}` },
     };
 
     axios
@@ -71,7 +62,7 @@ function UserProfile() {
             <SCHeader>
               <h1>Welcome back</h1>
               <EditUserForm
-                token={token}
+                token={Token()}
                 userFirstName={userFirstName}
                 userLastName={userLastName}
                 setDisplayName={setDisplayName}

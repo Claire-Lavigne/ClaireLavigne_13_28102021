@@ -13,7 +13,7 @@ const LoginForm = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
+  const onLogIn = (e) => {
     e.preventDefault();
 
     const data = {
@@ -55,7 +55,7 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onLogIn}>
       <SCInputWrapper>
         <label htmlFor="username">Username</label>
         <input

@@ -5,13 +5,13 @@ import { LOG_IN } from "../reducers/isLogged";
 import styled from "styled-components";
 
 function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState(userFirstName);
+  const [lastName, setLastName] = useState(userLastName);
   const [save, setSave] = useState(false);
 
   const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
+  const onEditUser = (e) => {
     e.preventDefault();
 
     if (save) {
@@ -19,6 +19,10 @@ function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
         firstName,
         lastName,
       };
+      if (firstName.length < 2 || lastName.length < 2) {
+        alert("il faut remplir les champs");
+        return false;
+      }
       let config = {
         headers: { Authorization: `Bearer ${token}` },
       };
@@ -43,7 +47,7 @@ function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
   };
 
   return (
-    <form onSubmit={onSubmit} autoComplete="false">
+    <form onSubmit={onEditUser} autoComplete="false">
       <div>
         <SCInputText
           type="text"

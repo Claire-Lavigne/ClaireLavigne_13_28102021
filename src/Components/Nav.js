@@ -4,24 +4,14 @@ import { Link } from "react-router-dom";
 import { LOG_OUT } from "../reducers/isLogged";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import Token from "../functions/checkToken";
 import styled from "styled-components";
 
 const Nav = () => {
   const userFirstName = useSelector((state) => state.user.firstName);
-  const sessionToken = sessionStorage.getItem("token");
-  const localToken = localStorage.getItem("token");
-
-  let token;
-  if (localToken) {
-    token = localToken;
-  }
-  if (sessionToken) {
-    token = sessionToken;
-  }
-
   const dispatch = useDispatch();
 
-  const onClick = () => {
+  const onSignOut = () => {
     dispatch({ type: LOG_OUT });
     localStorage.removeItem("token");
     sessionStorage.removeItem("token");
@@ -37,12 +27,12 @@ const Nav = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </SCNavLogo>
       <div>
-        {token ? (
+        {Token() ? (
           <>
             <SCNavLink to="/profile">
               <FontAwesomeIcon icon={faUserCircle} /> {userFirstName}
             </SCNavLink>
-            <SCNavLink to="/" onClick={onClick}>
+            <SCNavLink to="/" onClick={onSignOut}>
               <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
             </SCNavLink>
           </>
