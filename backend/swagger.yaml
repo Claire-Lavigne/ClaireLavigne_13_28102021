@@ -139,7 +139,7 @@ paths:
             $ref: "#/definitions/ApiResponse"
         "500":
           description: Internal Server Error
-  /user/transactions/{transactionId}:
+  /user/transactions/{id}:
     post:
       security:
         - Bearer: []
@@ -148,6 +148,11 @@ paths:
       summary: User Single Transaction API
       description: API to add one user's transaction
       parameters:
+        - in: path
+          name: id
+          description: ID of transaction to fetch
+          required: true
+          type: integer
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
@@ -172,6 +177,11 @@ paths:
       summary: User Single Transaction API
       description: API to update one user's transaction
       parameters:
+        - in: path
+          name: id
+          description: ID of transaction to fetch
+          required: true
+          type: integer
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
@@ -200,6 +210,11 @@ paths:
       summary: User Single Transaction API
       description: API to retrieve one user's transaction
       parameters:
+        - in: path
+          name: id
+          description: ID of transaction to fetch
+          required: true
+          type: integer
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
@@ -226,6 +241,11 @@ paths:
       summary: User Single Transaction API
       description: API to delete one user's transaction
       parameters:
+        - in: path
+          name: id
+          description: ID of transaction to fetch
+          required: true
+          type: integer
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
