@@ -1,21 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project #10 - Argent Bank API
 
-## Available Scripts
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+The backend directory contains the code needed to run the backend for Argent Bank.
+
+# Getting started
+
+## Prerequisites
+
+Argent Bank uses the following tech stack:
+
+- [Node.js v12](https://nodejs.org/en/)
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+
+Please make sure you have the right versions and download both packages:
+
+- `node --v`
+- `mongo --v`
+
+## Backend folder
+
+To make the server run with 2 users in MongoDB database at http://locahost:3001
+
+- `cd backend`
+- `npm install`
+- `npm run populate-db` # To add two users in database
+- `npm run dev:server`
+- [API Documentation](http://localhost:3001/api-docs)
+
+## Root folder
 
 - `yarn install`
 - `yarn start`
 - [View app in browser](http://localhost:3000)
+
+Other available scripts :
+
 - `yarn test`
 - `yarn build`
 
-## Learn More
+# Populated Database Data
 
-- [Deployment](https://facebook.github.io/create-react-app/docs/deployment)
-- [Running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-- [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
-- [React](https://reactjs.org/)
-- [Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-- [Analyzing the Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-- [Making a Progressive Web App](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-- [Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-- [`yarn build` fails to minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tony Stark
+
+- First Name: `Tony`
+- Last Name: `Stark`
+- Email: `tony@stark.com`
+- Password: `password123`
+
+## Steve Rogers
+
+- First Name: `Steve`,
+- Last Name: `Rogers`,
+- Email: `steve@rogers.com`,
+- Password: `password456`
