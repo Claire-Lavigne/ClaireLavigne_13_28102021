@@ -139,7 +139,7 @@ paths:
             $ref: "#/definitions/ApiResponse"
         "500":
           description: Internal Server Error
-  /user/transaction:
+  /user/transactions/{transactionId}:
     post:
       security:
         - Bearer: []
