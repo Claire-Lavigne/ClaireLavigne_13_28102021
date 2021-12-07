@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import Token from "../functions/checkToken";
 import Nav from "../Components/Nav";
 import LoginForm from "../Components/LoginForm";
 import Footer from "../Components/Footer";
@@ -8,34 +9,21 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 function Login() {
-  const sessionToken = sessionStorage.getItem("token");
-  const localToken = localStorage.getItem("token");
-
-  let token;
-  if (localToken) {
-    token = localToken;
-  }
-  if (sessionToken) {
-    token = sessionToken;
-  }
-
-  if (token) {
-    return <Redirect to="/profile" />;
-  } else {
-    return (
-      <>
-        <Nav />
-        <main className="main bg-dark">
-          <SCSectionSignIn>
-            <FontAwesomeIcon icon={faUserCircle} />
-            <h1>Sign In</h1>
-            <LoginForm />
-          </SCSectionSignIn>
-        </main>
-        <Footer />
-      </>
-    );
-  }
+  Token() ? (
+    <Redirect to="/profile" />
+  ) : (
+    <>
+      <Nav />
+      <main className="main bg-dark">
+        <SCSectionSignIn>
+          <FontAwesomeIcon icon={faUserCircle} />
+          <h1>Sign In</h1>
+          <LoginForm />
+        </SCSectionSignIn>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default Login;

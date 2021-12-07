@@ -63,6 +63,12 @@ const SCNavLogo = styled(Link)`
   img {
     max-width: 100%;
     width: 200px;
+    @media screen and (min-width: 320px) {
+      width: 150px;
+    }
+    @media screen and (min-width: 375px) {
+      width: 100px;
+    }
   }
 `;
 
