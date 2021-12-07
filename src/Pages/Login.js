@@ -9,21 +9,23 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 function Login() {
-  Token() ? (
-    <Redirect to="/profile" />
-  ) : (
-    <>
-      <Nav />
-      <main className="main bg-dark">
-        <SCSectionSignIn>
-          <FontAwesomeIcon icon={faUserCircle} />
-          <h1>Sign In</h1>
-          <LoginForm />
-        </SCSectionSignIn>
-      </main>
-      <Footer />
-    </>
-  );
+  if (Token()) {
+    return <Redirect to="/profile" />;
+  } else {
+    return (
+      <>
+        <Nav />
+        <main className="main bg-dark">
+          <SCSectionSignIn>
+            <FontAwesomeIcon icon={faUserCircle} />
+            <h1>Sign In</h1>
+            <LoginForm />
+          </SCSectionSignIn>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 }
 
 export default Login;
