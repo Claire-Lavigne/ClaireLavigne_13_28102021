@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { LOG_IN } from "../actions/ActionType";
 import styled from "styled-components";
 
-function EditUserForm({ token, userFirstName, userLastName, setDisplayName }) {
+function EditUserForm({ token, setDisplayName }) {
+  const userFirstName = useSelector((state) => state.user.firstName);
+  const userLastName = useSelector((state) => state.user.lastName);
   const [firstName, setFirstName] = useState(userFirstName);
   const [lastName, setLastName] = useState(userLastName);
   const [displayError, setDisplayError] = useState(false);

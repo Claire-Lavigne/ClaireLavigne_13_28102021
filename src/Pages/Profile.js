@@ -61,12 +61,7 @@ function UserProfile() {
           ) : (
             <SCHeader>
               <h1>Welcome back</h1>
-              <EditUserForm
-                token={Token()}
-                userFirstName={userFirstName}
-                userLastName={userLastName}
-                setDisplayName={setDisplayName}
-              />
+              <EditUserForm token={Token()} setDisplayName={setDisplayName} />
             </SCHeader>
           )}
           <h2 className="sr-only">Accounts</h2>
