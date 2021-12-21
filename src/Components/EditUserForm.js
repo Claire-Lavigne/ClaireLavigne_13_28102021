@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Token from "../functions/checkToken";
 import { LOG_IN } from "../actions/ActionType";
 import styled from "styled-components";
 
-function EditUserForm({ token, setDisplayName }) {
+function EditUserForm({ setDisplayName }) {
   const userFirstName = useSelector((state) => state.user.firstName);
   const userLastName = useSelector((state) => state.user.lastName);
   const [firstName, setFirstName] = useState(userFirstName);
@@ -27,7 +28,7 @@ function EditUserForm({ token, setDisplayName }) {
         return false;
       }
       let config = {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${Token()}` },
       };
 
       axios
