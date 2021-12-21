@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import datas from "../datas";
-import GetProfile from "../functions/getProfile";
 import Token from "../functions/checkToken";
 import Nav from "../Components/Nav";
 import EditUserForm from "../Components/EditUserForm";
@@ -23,7 +22,6 @@ const UserProfile = () => {
   if (!Token()) {
     return <Redirect to="/login" />;
   } else {
-    GetProfile();
     return (
       <>
         <Nav />
