@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import GetProfile from "../functions/getProfile";
 import { LOG_OUT } from "../actions/ActionType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -28,14 +29,17 @@ const Nav = () => {
       </SCNavLogo>
       <div>
         {Token() ? (
-          <>
-            <SCNavLink to="/profile">
-              <FontAwesomeIcon icon={faUserCircle} /> {userFirstName}
-            </SCNavLink>
-            <SCNavLink to="/" onClick={onSignOut}>
-              <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
-            </SCNavLink>
-          </>
+          (GetProfile(), // keep username if actualise
+          (
+            <>
+              <SCNavLink to="/profile">
+                <FontAwesomeIcon icon={faUserCircle} /> {userFirstName}
+              </SCNavLink>
+              <SCNavLink to="/" onClick={onSignOut}>
+                <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
+              </SCNavLink>
+            </>
+          ))
         ) : (
           <SCNavLink to="/login">
             <FontAwesomeIcon icon={faUserCircle} /> Sign In
