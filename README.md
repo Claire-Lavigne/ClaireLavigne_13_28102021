@@ -15,6 +15,7 @@ Please make sure you have the right versions and download both packages:
 - `mongo --v`
 
 ## Back
+This is the [Original Backend Repo](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)  
 To make the server run with 2 users in MongoDB database at http://locahost:3001
 
 - `cd backend`
@@ -23,9 +24,8 @@ To make the server run with 2 users in MongoDB database at http://locahost:3001
 - `npm run dev:server`
 - [API Documentation](http://localhost:3001/api-docs)
 
-## Front
+## Front (root folder)
 
-- root folder
 - `yarn install`
 - `yarn start`
 - [View app in browser](http://localhost:3000)
