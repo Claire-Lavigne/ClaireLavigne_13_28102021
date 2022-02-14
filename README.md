@@ -1,7 +1,6 @@
-# Project #10 - Argent Bank API
+# Project 13 - Argent Bank API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
-The backend directory contains the code needed to run the backend for Argent Bank.
 
 # Getting started
 
@@ -18,7 +17,6 @@ Please make sure you have the right versions and download both packages:
 - `mongo --v`
 
 ## Backend folder
-
 To make the server run with 2 users in MongoDB database at http://locahost:3001
 
 - `cd backend`
@@ -32,11 +30,6 @@ To make the server run with 2 users in MongoDB database at http://locahost:3001
 - `yarn install`
 - `yarn start`
 - [View app in browser](http://localhost:3000)
-
-Other available scripts :
-
-- `yarn test`
-- `yarn build`
 
 # Populated Database Data
 
