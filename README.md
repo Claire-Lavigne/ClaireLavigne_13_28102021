@@ -1,6 +1,4 @@
-# Project 13 - Argent Bank API
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+# Project 13 - Argent Bank API (React)
 
 # Getting started
 
