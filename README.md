@@ -1,4 +1,8 @@
-# Project 13 - Argent Bank API (React)
+# Project 13 | Argent Bank API
+
+[![Badge_React](https://img.shields.io/badge/ReactJS-blue)](https://img.shields.io)
+
+<img src="https://github.com/Claire-Lavigne/repo-images/blob/main/ArgentBank.JPG" width="20%">
 
 # Getting started
 
